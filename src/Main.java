@@ -57,6 +57,7 @@ public class Main {
 
         System.out.println(list);
 
+
         int min = list.stream()
                 .sorted(Comparator.naturalOrder())
                 .findAny().orElse(list.get(0));
@@ -79,6 +80,22 @@ public class Main {
 //        System.out.println(minMaxConsumer);
     }
 
+    public static void findMinMax(Stream<Integer> stream,
+                                  Comparator<Integer> order,
+                                  BiConsumer<Integer, Integer> minMaxConsumer) {
+
+
+        int min = stream
+                .sorted(order.reversed())
+                .findAny().orElse(list.get(list.size())-1);
+
+        int max = stream
+                .sorted(order.reversed())
+                .findAny().orElse(list.get(0));
+
+        minMaxConsumer.accept(min, max);
+    }
+
     public static void task2() {
         System.out.println("\nЗадача №2\n");
 
@@ -95,7 +112,7 @@ public class Main {
          */
 
         for (int i = 0; i < 50; i++) {
-           list.add(i, random.nextInt(1000));
+            list.add(i, random.nextInt(1000));
         }
 
         System.out.println(list);
@@ -103,11 +120,11 @@ public class Main {
         System.out.println(getCountEvenNumbers(list));
     }
 
-    public static Integer getCountEvenNumbers(List<Integer> listNumbers) {
-        List<Integer> countEvenNumbers = listNumbers.stream()
-                .filter(x->x%2==0)
-                .collect(Collectors.toList());
+    public static Long getCountEvenNumbers(List<Integer> listNumbers) {
+        long count = listNumbers.stream()
+                .filter(x -> x % 2 == 0)
+                .count();
 
-        return countEvenNumbers.size();
+        return count;
     }
 }

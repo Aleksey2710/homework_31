@@ -49,20 +49,18 @@ public class Main {
                                   Comparator<Integer> order,
                                   BiConsumer<Integer, Integer> minMaxConsumer) {
 
-        int min=0;
-        int max=0;
+        Integer min;
+        Integer max;
 
         list = stream
                 .sorted(order)
                 .collect(Collectors.toList());
 
-        if (list.size() != 0) {
+        if (!list.isEmpty()) {
             min = list.get(0);
-            max=list.get(list.size() - 1);
+            max = list.get(list.size() - 1);
 
             minMaxConsumer.accept(min, max);
-        } else {
-            minMaxConsumer.accept(null, null);
         }
     }
 
